@@ -1,14 +1,16 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    city: {
-        type: String,
-    },
+    
     fullName: {
         type: String,
     },
     fatherName: {
         type: String,
+    },
+    cnic: {
+        type: String,
+        required: true
     },
     email: {
         type: String,
@@ -18,16 +20,13 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    city: {
+        type: String,
+    },
     phone: {
         type: String,
     },
-    cnic: {
-        type: String,
-        required: true
-    },
-    father_cnic: {
-        type: String,
-    },
+   
     date_of_birth: {
         type: String,
     },

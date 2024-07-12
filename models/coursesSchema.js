@@ -1,21 +1,35 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-
-const courseSchema = new mongoose.Schema({
-    course_name: {
+const studentSchema = new mongoose.Schema({
+    fullname: {
         type: String,
         required: true
     },
-    batch: {
+    cnic: {
         type: String,
+        required: true
+    },
+    phone: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    }
+});
+
+const batchSchema = new mongoose.Schema({
+    batch_id: {
+        type: Number,
         required: true
     },
     students_enrolled: {
-        type: [String],
+        type: [studentSchema],
         required: true
     },
     deadline: {
-        type: Date, 
+        type: Date,
         required: true
     },
     region: {
@@ -28,5 +42,16 @@ const courseSchema = new mongoose.Schema({
     }
 });
 
-const courseModel = mongoose.model("course", courseSchema);
-export default courseModel;
+const courseSchema = new mongoose.Schema({
+    course_name: {
+        type: String,
+        required: true
+    },
+    batch: {
+        type: [batchSchema],
+        required: true
+    }
+    
+});
+
+module.exports = mongoose.model('Course', courseSchema);
