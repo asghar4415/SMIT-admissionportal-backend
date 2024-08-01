@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  getStdDetails,
   loginController,
   otpProcessApi,
   otpVerify,
@@ -15,6 +16,7 @@ import {
   viewCourses,
   studentDetails,
   getUserData,
+  viewEnrolledCourses,
 } from "../Controllers/CourseController.js";
 
 const router = express.Router();
@@ -23,17 +25,19 @@ router.post("/api/auth/register", signupController);
 router.post("/api/auth/login", loginController);
 router.post("/api/verifyotp", otpVerify);
 
-
+router.get("/get-std-details",)
 router.post("/update-student-details", verifyTokenMiddleware, studentDetails);
 router.post("/api/auth/resend-otp", otpProcessApi);
 router.post(
-  "/api/upload-stu-image",
-  verifyTokenMiddleware,
+  "/api/uploadimage",
   upload.any("image"),
   UploadImage
 );
 
-router.get("/getUserData", getUserData);
+router.get("/getUserData/:email", getStdDetails);
+
+router.get("/api/course/enrolled-courses", viewEnrolledCourses);
+
 router.get("/api/course/view", viewCourses);
 router.get("/api/course/view:id", viewCoursebyID);
 router.get("/api/auth/verify", verifyTokenMiddleware, verify);

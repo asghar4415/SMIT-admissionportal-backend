@@ -1,5 +1,6 @@
 import courseModel from "../models/coursesSchema.js";
 
+
 // export const addCourseController = async (req, res) => {
 //   const { course_name, batch, students_enrolled, deadline, region } = req.body;
 
