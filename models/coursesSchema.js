@@ -19,6 +19,7 @@ const studentSchema = new mongoose.Schema({
     }
 });
 
+
 const batchSchema = new mongoose.Schema({
     batch_id: {
         type: Number,
@@ -42,6 +43,8 @@ const batchSchema = new mongoose.Schema({
     }
 });
 
+
+
 const courseSchema = new mongoose.Schema({
     course_name: {
         type: String,
@@ -54,4 +57,6 @@ const courseSchema = new mongoose.Schema({
     
 });
 
-module.exports = mongoose.model('Course', courseSchema);
+const CourseModel=mongoose.model('Course', courseSchema);
+
+export default CourseModel

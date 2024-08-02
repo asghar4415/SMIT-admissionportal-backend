@@ -92,7 +92,7 @@ const signupController = async (req, res) => {
       });
     }
 
-    const userCreated = await userModel.create({ name, email, password,cnic });
+    const userCreated = await userModel.create({ fullName:name, email, password,cnic });
     console.log(userCreated._id);
 
     
@@ -200,9 +200,18 @@ const verifyController = async (req, res) => {
   res.json("user verified")
 };
 
+const getStdDetails =async(req,res)=>{
+    const {email} = req.params
+
+    const userDetails = await userModel.findOne({email})
+    res.json(userDetails)
+    console.log(userDetails)
+}
+
 export {
   signupController,
   loginController,
   verifyController as verify,
-  otpVerify
+  otpVerify,
+  getStdDetails
 };
