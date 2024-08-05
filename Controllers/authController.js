@@ -8,7 +8,7 @@ import { EmailVerificationHtml } from "../template/index.js";
 
 export const otpProcess = async (userId, email) => {
 
-  console.log("hit howa")
+  // console.log("hit howa")
   await otpModel.findOneAndDelete({userId:email});
   const generatedOtp = crypto.randomInt(100000, 999999).toString();
   console.log("chala")
@@ -62,11 +62,11 @@ export const otpProcessApi = async (req,res) => {
 };
 
 const signupController = async (req, res) => {
-  console.log("Signup hit");
+  // console.log("Signup hit");
   try {
     const { name, email, password,cnic} = req.body;
 
-    console.log("hi",name, email, password,cnic)
+    // console.log("hi",name, email, password,cnic)
     if (!name || !email || !password || !cnic) {
       console.log(email, name, password);
       return res.status(400).json({
@@ -84,7 +84,7 @@ const signupController = async (req, res) => {
     });
 
     if (userExist) {
-      console.log(userExist);
+      // console.log(userExist);
       return res.status(400).json({
         data: null,
         message: "Email already exists",
@@ -93,14 +93,14 @@ const signupController = async (req, res) => {
     }
 
     const userCreated = await userModel.create({ fullName:name, email, password,cnic });
-    console.log(userCreated._id);
+    // console.log(userCreated._id);
 
     
-    await otpProcess(userCreated._id, email);
+    // await otpProcess(userCreated._id, email);
 
     res.json({
       data: null,
-      message: "User created. OTP sent to email.",
+      message: "User created.",
       status: true
     });
 
@@ -144,14 +144,14 @@ const otpVerify = async (req, res) => {
     status: true,
   });
 
-  console.log(getOtp);
+  // console.log(getOtp);
 };
 
 
 const loginController = async (req, res) => {
-  const { email, password } = req.body;
+  const { cnic, password } = req.body;
 
-  if (!email || !password) {
+  if (!cnic || !password) {
     return res.json({
       data: null,
       status: false,
@@ -161,31 +161,36 @@ const loginController = async (req, res) => {
 
   const userExist = await userModel.findOne({
     $or: [
-      { email: email },
-      { cnic: email }
+      { cnic: cnic }
     ]
+
   });
+
+
 
   if (!userExist) {
     console.log("User does not exist");
     return res.status(400).json({
       data: null,
       status: false,
-      message: "Email does not exist"
+      message: "CNIC does not exist"
     });
   }
 
-  if (userExist.password !== password) {
+  if (userExist.password != password) {
     return res.status(400).json({
       data: null,
       status: false,
       message: "Password incorrect"
     });
   }
-
-  const token = jwt.sign({email:userExist.email}, process.env.TOKEN_KEY, {
+  console.log("TOKEN_KEY:", process.env.TOKEN_KEY); 
+  console.log("works fine");
+  const token = jwt.sign({cnic:userExist.cnic}, process.env.TOKEN_KEY, {
     expiresIn: '5hr',
-  });
+  });   
+  // console.log("token",token);
+  
 
   res.json({
     data: userExist,
@@ -201,9 +206,9 @@ const verifyController = async (req, res) => {
 };
 
 const getStdDetails =async(req,res)=>{
-    const {email} = req.params
+    const {cnic} = req.params
 
-    const userDetails = await userModel.findOne({email})
+    const userDetails = await userModel.findOne({cnic})
     res.json(userDetails)
     console.log(userDetails)
 }

@@ -34,7 +34,7 @@ router.post(
   UploadImage
 );
 
-router.get("/getUserData/:email", getStdDetails);
+router.get("/getUserData/:cnic", getStdDetails);
 
 router.get("/api/course/enrolled-courses", viewEnrolledCourses);
 

@@ -221,14 +221,14 @@ export const studentDetails = async (req, res) => {
 }
 
 export const getUserData =async (req, res) => {
-  const { email } = req.query;
+  const { cnic } = req.query;
 
-  if (!email) {
-      return res.status(400).json({ error: "Email is required." });
+  if (!cnic) {
+      return res.status(400).json({ error: "CNIC is required." });
   }
 
   try {
-      const user = await userModel.findOne({ email });
+      const user = await userModel.findOne({ cnic });
 
       if (!user) {
           return res.status(404).json({ error: "User not found." });
