@@ -184,10 +184,11 @@ const loginController = async (req, res) => {
       message: "Password incorrect"
     });
   }
-  console.log("TOKEN_KEY:", process.env.TOKEN_KEY); 
-  console.log("works fine");
-  const token = jwt.sign({cnic:userExist.cnic}, process.env.TOKEN_KEY, {
-    expiresIn: '5hr',
+  const tokenkey= process.env.TOKEN_KEY;
+  // console.log("TOKEN_KEY:", process.env.TOKEN_KEY); 
+  // console.log("works fine");
+  const token = jwt.sign({cnic:userExist.cnic}, tokenkey, {
+    expiresIn: '2hr',
   });   
   // console.log("token",token);
   
