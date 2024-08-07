@@ -1,4 +1,4 @@
-[
+const mockData = [
     {
         "course_name": "Web Development",
         "batch": [
@@ -25,7 +25,7 @@
                     }
                 ],
                 "deadline": "2024-09-01T00:00:00.000Z",
-                "region": "North",
+                "region": "Karachi",
                 "test_date": "2024-09-15"
             },
             {
@@ -50,8 +50,8 @@
                         "email": "frank.miller@example.com"
                     }
                 ],
-                "deadline": "2024-09-01T00:00:00.000Z",
-                "region": "North",
+                "deadline": "2023-09-01T00:00:00.000Z",
+                "region": "Karachi",
                 "test_date": "2024-09-15"
             }
         ]
@@ -82,7 +82,7 @@
                     }
                 ],
                 "deadline": "2024-10-01T00:00:00.000Z",
-                "region": "South",
+                "region": "Islamabad",
                 "test_date": "2024-10-15"
             },
             {
@@ -108,7 +108,7 @@
                     }
                 ],
                 "deadline": "2024-10-01T00:00:00.000Z",
-                "region": "South",
+                "region": "Hyderabad",
                 "test_date": "2024-10-15"
             }
         ]
@@ -138,8 +138,8 @@
                         "email": "olivia.pope@example.com"
                     }
                 ],
-                "deadline": "2024-11-01T00:00:00.000Z",
-                "region": "East",
+                "deadline": "2023-11-01T00:00:00.000Z",
+                "region": "Islamabad",
                 "test_date": "2024-11-15"
             },
             {
@@ -165,9 +165,11 @@
                     }
                 ],
                 "deadline": "2024-11-01T00:00:00.000Z",
-                "region": "East",
+                "region": "Karachi",
                 "test_date": "2024-11-15"
             }
         ]
     }
-]
+];
+
+export default mockData;

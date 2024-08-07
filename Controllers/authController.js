@@ -211,7 +211,7 @@ const getStdDetails =async(req,res)=>{
 
     const userDetails = await userModel.findOne({cnic})
     res.json(userDetails)
-    console.log(userDetails)
+    // console.log(userDetails)
 }
 
 export {
@@ -221,3 +221,5 @@ export {
   otpVerify,
   getStdDetails
 };
+
+

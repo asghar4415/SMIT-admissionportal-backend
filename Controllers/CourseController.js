@@ -1,4 +1,6 @@
 import courseModel from "../models/coursesSchema.js";
+import mockData from "../mock_data.js";
+
 
 
 // export const addCourseController = async (req, res) => {
@@ -96,12 +98,11 @@ export const viewEnrolledCourses = async (req, res) => {
 
 export const viewCourses = async (req, res) => {
   try {
-    const now = new Date();
-    const courses = await courseModel.find();
-    const availCourses = courses.filter(
-      (course) => new Date(course.deadline) > now
-    );
-    res.status(200).json(availCourses);
+    // const courses = await courseModel.find();
+    const courses = mockData;
+    
+  
+    res.status(200).json(courses);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch courses." });
   }
