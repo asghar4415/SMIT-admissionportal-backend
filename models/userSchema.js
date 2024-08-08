@@ -1,5 +1,31 @@
 import mongoose from "mongoose";
 
+
+const appliedCourses = new mongoose.Schema({
+    courseName:{
+        type:String,
+        required:true
+    },
+    courseBatch:{
+        type:String,
+        required:true
+    },
+    courseRegion:{
+        type:String,
+        required:true
+    },
+    courseResult:{
+        type:Boolean,
+        default:false
+    },
+    courseMarks:{
+        type:Number,
+        default:0
+    }
+
+
+})
+
 const userSchema = new mongoose.Schema({
     
     fullName: {
@@ -42,13 +68,9 @@ const userSchema = new mongoose.Schema({
     laptop: {
         type: Boolean,
     },
-    marks:{
-        type:Number,
-        default:0
-    },
-    result:{
-        type:Boolean,
-        default:false
+    coursesApplied:{
+        type:[appliedCourses],
+        required:false
     },
     img:{
         type:[String],
