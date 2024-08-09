@@ -9,7 +9,7 @@ import { EmailVerificationHtml } from "../template/index.js";
 export const otpProcess = async (userId, email) => {
 
   // console.log("hit howa")
-  await otpModel.findOneAndDelete({userId:email});
+  await otpModel.deleteMany({userId:email});
   const generatedOtp = crypto.randomInt(100000, 999999).toString();
   console.log("chala")
   await otpModel.create({ otp: generatedOtp, userId:email });
@@ -31,14 +31,26 @@ export const otpProcess = async (userId, email) => {
 };
 
 
+export const userOtpVerified = async(req,res)=>{
+  
+  const email =req.params.email
+  console.log("params",email)
+  const otpuser = await otpModel.findOne({userId:email})
+ 
+  
+  if(otpuser?.verified){
+    res.status(400).json("user verified hae agae kuch mat karo")
+    return
+  }
+  res.json("otp process remaining")
+  
+}
 export const otpProcessApi = async (req,res) => {
-  console.log("mae chala");
-
-  const email =req.body?.id
-  console.log("email",req.body)
+  console.log("maeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee req howa")
+  const email =req.body.email
   console.log("hit howa")
+  const otpuser = await otpModel.deleteMany({userId:email})
 
-  await otpModel.findOneAndDelete({userId:email});
   const generatedOtp = crypto.randomInt(100000, 999999).toString();
   console.log("chala")
   await otpModel.create({ otp: generatedOtp, userId:email });
@@ -118,6 +130,7 @@ const otpVerify = async (req, res) => {
   }
 
   let getOtp = await otpModel.findOne({userId:id});
+  console.log(getOtp)
   console.log("getOtp",getOtp)
   if (!getOtp) {
     return res.status(400).json({
@@ -219,7 +232,6 @@ export {
   loginController,
   verifyController as verify,
   otpVerify,
-  getStdDetails
-};
-
-
+  getStdDetails,
+  
+};  

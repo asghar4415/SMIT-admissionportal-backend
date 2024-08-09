@@ -5,6 +5,7 @@ import {
   otpProcessApi,
   otpVerify,
   signupController,
+  userOtpVerified,
   verify,
 } from "../Controllers/authController.js";
 import upload from "../utils/multer.js";
@@ -35,7 +36,7 @@ router.post(
 );
 
 router.get("/getUserData/:cnic", getStdDetails);
-
+router.get("/userOtpVerified/:email",userOtpVerified)
 router.get("/api/course/enrolled-courses", viewEnrolledCourses);
 
 router.get("/api/course/view", viewCourses);
