@@ -7,11 +7,19 @@ const appliedCourses = new mongoose.Schema({
         required:true
     },
     courseBatch:{
-        type:String,
+        type:Number,
         required:true
     },
     courseRegion:{
         type:String,
+        required:true
+    },
+    courseDeadline:{
+        type:Date,
+        required:true
+    },
+    courseTestDate:{
+        type:Date,
         required:true
     },
     courseResult:{

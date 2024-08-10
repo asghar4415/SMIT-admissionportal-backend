@@ -17,7 +17,9 @@ import {
   viewCourses,
   studentDetails,
   getUserData,
-  viewEnrolledCourses,
+  enrollIntoCourse,
+  notificationHandler,
+  notificationHandler2,
 } from "../Controllers/CourseController.js";
 
 const router = express.Router();
@@ -37,11 +39,14 @@ router.post(
 
 router.get("/getUserData/:cnic", getStdDetails);
 router.get("/userOtpVerified/:email",userOtpVerified)
-router.get("/api/course/enrolled-courses", viewEnrolledCourses);
+router.post("/api/course/enroll", enrollIntoCourse);
 
 router.get("/api/course/view", viewCourses);
 router.get("/api/course/view:id", viewCoursebyID);
 router.get("/api/auth/verify", verifyTokenMiddleware, verify);
+
+router.get("/api/notification/:region", notificationHandler);
+router.get("/api/getnotification/:cnic", notificationHandler2);
 
 
 

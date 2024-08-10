@@ -32,19 +32,29 @@ export const otpProcess = async (userId, email) => {
 export const userOtpVerified = async(req,res)=>{
   
   const email =req.params.email
-
+// console.log(email)  
   const otpuser = await otpModel.findOne({userId:email})
  
-  
   if(otpuser?.verified){
-    res.status(400).json("user verified hae agae kuch mat karo")
+    res.json(
+      {
+        data:null,
+        message:"user already verified",
+        status:true
+      }
+    )
     return
   }
-  res.json("otp process remaining")
+  res.json(
+    {
+      data:null,
+      message:"user not verified",
+      status:false
+    }
+  )
   
 }
 export const otpProcessApi = async (req,res) => {
-  console.log("maeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee req howa")
   const email =req.body.email
   const otpuser = await otpModel.deleteMany({userId:email})
 
@@ -74,7 +84,6 @@ const signupController = async (req, res) => {
   try {
     const { name, email, password,cnic} = req.body;
 
-    // console.log("hi",name, email, password,cnic)
     if (!name || !email || !password || !cnic) {
       return res.status(400).json({
         data: null,
@@ -82,7 +91,6 @@ const signupController = async (req, res) => {
         message: "Required fields are missing"
       });
     }
-
     const userExist = await userModel.findOne({
       $or: [
         { email: email },
@@ -90,8 +98,9 @@ const signupController = async (req, res) => {
       ]
     });
 
+
     if (userExist) {
-      return res.status(400).json({
+      return res.json({
         data: null,
         message: "Email already exists",
         status: false
@@ -187,12 +196,9 @@ const loginController = async (req, res) => {
     });
   }
   const tokenkey= process.env.TOKEN_KEY;
-  // console.log("TOKEN_KEY:", process.env.TOKEN_KEY); 
-  // console.log("works fine");
   const token = jwt.sign({cnic:userExist.cnic}, tokenkey, {
     expiresIn: '2hr',
   });   
-  // console.log("token",token);
   
 
   res.json({
@@ -213,7 +219,7 @@ const getStdDetails =async(req,res)=>{
 
     const userDetails = await userModel.findOne({cnic})
     res.json(userDetails)
-    // console.log(userDetails)
+    
 }
 
 export {
