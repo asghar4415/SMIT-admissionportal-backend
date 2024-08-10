@@ -34,7 +34,7 @@ export const otpProcess = async (userId, email) => {
 export const userOtpVerified = async(req,res)=>{
   
   const email =req.params.email
-  console.log("params",email)
+  // console.log("params",email)
   const otpuser = await otpModel.findOne({userId:email})
  
   
@@ -46,9 +46,9 @@ export const userOtpVerified = async(req,res)=>{
   
 }
 export const otpProcessApi = async (req,res) => {
-  console.log("maeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee req howa")
+  // console.log("maeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee req howa")
   const email =req.body.email
-  console.log("hit howa")
+  // console.log("hit howa")
   const otpuser = await otpModel.deleteMany({userId:email})
 
   const generatedOtp = crypto.randomInt(100000, 999999).toString();
@@ -65,7 +65,7 @@ export const otpProcessApi = async (req,res) => {
 
    transporter.sendMail({
     from: process.env.EMAIL,
-    to: "bilalahmedfarooqi03@gmail.com",
+    to: "asghar778788@gmail.com",
     subject: "Email Verification",
     html: EmailVerificationHtml(generatedOtp),
   });

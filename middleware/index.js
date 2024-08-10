@@ -16,17 +16,6 @@ export const verifyTokenMiddleware = async(req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.TOKEN_KEY);
-//      console.log(decoded);
-//     const isOtpVerified = await otpModel.findOne({userId: decoded?.cnic});
-// console.log(isOtpVerified)
-//     if (!isOtpVerified?.verified) {
-      
-//       return res.json({
-//         message: "user_unverified",
-//         status: false,
-//         email: decoded.email
-//       });
-//     }
 
     req.userCnic = decoded?.cnic;
     next();
