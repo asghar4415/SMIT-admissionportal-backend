@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(cors());
-const uri = "mongodb+srv://bilal:bilal@cluster0.ng610yy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = "mongodb://localhost:27017/smit";
 
 
 mongoose.connect(uri);
