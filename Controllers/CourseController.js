@@ -2,7 +2,7 @@ import courseModel from "../models/coursesSchema.js";
 import mockData from "../mock_data.js";
 
 import userModel from "../models/userSchema.js";
-import notificationModel from "./notificationSchema.js";
+import notificationModel from "../models/notificationSchema.js";
 import notification from "../mock_notification.js";
 
 
@@ -69,23 +69,7 @@ export const viewCourses = async (req, res) => {
   }
 };
 
-export const viewCoursebyID = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const course = await courseModel.findById(id);
-    if (!course) {
-      return res.status(404).json({ error: "Course not found." });
-    }
 
-    const now = new Date();
-    if (new Date(course.deadline) <= now) {
-      return res.status(400).json({ error: "Course deadline has passed." });
-    }
-    res.status(200).json(course);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch course." });
-  }
-};
 
 export const studentDetails = async (req, res) => {
   const {

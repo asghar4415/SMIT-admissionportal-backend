@@ -32,7 +32,6 @@ export const otpProcess = async (userId, email) => {
 export const userOtpVerified = async(req,res)=>{
   
   const email =req.params.email
-// console.log(email)  
   const otpuser = await otpModel.findOne({userId:email})
  
   if(otpuser?.verified){
@@ -118,7 +117,6 @@ const signupController = async (req, res) => {
     });
 
   } catch (err) {
-    console.log(err);
     res.status(500).json("Something went wrong");
   }
 };
@@ -180,7 +178,6 @@ const loginController = async (req, res) => {
 
 
   if (!userExist) {
-    console.log("User does not exist");
     return res.status(400).json({
       data: null,
       status: false,

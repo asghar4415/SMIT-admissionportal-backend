@@ -13,10 +13,10 @@ import { UploadImage } from "../Controllers/postController.js";
 import { verifyTokenMiddleware } from "../middleware/index.js";
 
 import {
-  viewCoursebyID,
+  
   viewCourses,
   studentDetails,
-  getUserData,
+  
   enrollIntoCourse,
   notificationHandler,
   notificationHandler2,
@@ -28,7 +28,6 @@ router.post("/api/auth/register", signupController);
 router.post("/api/auth/login", loginController);
 router.post("/api/verifyotp", otpVerify);
 
-router.get("/get-std-details",)
 router.post("/update-student-details", verifyTokenMiddleware, studentDetails);
 router.post("/api/auth/resend-otp", otpProcessApi);
 router.post(
@@ -42,7 +41,6 @@ router.get("/userOtpVerified/:email",userOtpVerified)
 router.post("/api/course/enroll", enrollIntoCourse);
 
 router.get("/api/course/view", viewCourses);
-router.get("/api/course/view:id", viewCoursebyID);
 router.get("/api/auth/verify", verifyTokenMiddleware, verify);
 
 router.get("/api/notification/:region", notificationHandler);

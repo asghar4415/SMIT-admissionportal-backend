@@ -8,7 +8,6 @@ export const verifyTokenMiddleware = async(req, res, next) => {
     const token = authHeader && authHeader.split(" ")[1];
    
     if (!token) {
-      console.log("token not found");
       return res.status(400).json({
         message: "UnAuth User",
         status: false,
@@ -20,7 +19,6 @@ export const verifyTokenMiddleware = async(req, res, next) => {
     req.userCnic = decoded?.cnic;
     next();
   } catch (err) {
-    console.log(err);
     res.status(401).json("unAuth User");
   }
 };
