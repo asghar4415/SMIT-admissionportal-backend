@@ -12,12 +12,9 @@ cloudinary.config({
 const unlinkAsync = promisify(fs.unlink);
 
 export const UploadImage = async (req, res) => {
-  console.log("hit howe")
     const urls = [];
-    console.log("files", req.files);
   
     if (!req.files.length) {
-  console.log("hit howe error")
 
       return res.json({
         status: true,
@@ -28,7 +25,6 @@ export const UploadImage = async (req, res) => {
   
     try {
       for (const file of req.files) {
-        console.log("------------", file);
         const path = file.path;
         if (!path) {
           return res.json({
@@ -43,10 +39,8 @@ export const UploadImage = async (req, res) => {
           urls.push(uploadResult.secure_url);
           await unlinkAsync(path); 
         } else {
-          console.log("File does not exist at path:", path);
         }
       }
-      console.log(urls)
       return res.json({
         status: true,
         message: "Images uploaded",

@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(cors());
-const uri = "mongodb://localhost:27017/smit";
+const uri = "mongodb+srv://bilal:bilal@cluster0.ng610yy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 
 mongoose.connect(uri);
@@ -26,7 +26,6 @@ app.get("/", (req, res) => {
 });
 
 app.post('/updateUserData', async (req, res) => {
-    console.log("body",req.body)
     try {
       const { email, ...updatedData } = req.body;
       const user = await userModel.findOneAndUpdate({ email }, updatedData, { new: true });
