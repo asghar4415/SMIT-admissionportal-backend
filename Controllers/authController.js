@@ -8,10 +8,8 @@ import { EmailVerificationHtml } from "../template/index.js";
 
 export const otpProcess = async (userId, email) => {
 
-  // console.log("hit howa")
   await otpModel.deleteMany({userId:email});
   const generatedOtp = crypto.randomInt(100000, 999999).toString();
-  console.log("chala")
   await otpModel.create({ otp: generatedOtp, userId:email });
 
   const transporter = nodemailer.createTransport({
@@ -34,7 +32,7 @@ export const otpProcess = async (userId, email) => {
 export const userOtpVerified = async(req,res)=>{
   
   const email =req.params.email
-  // console.log("params",email)
+
   const otpuser = await otpModel.findOne({userId:email})
  
   
@@ -46,13 +44,11 @@ export const userOtpVerified = async(req,res)=>{
   
 }
 export const otpProcessApi = async (req,res) => {
-  // console.log("maeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee req howa")
+  console.log("maeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee req howa")
   const email =req.body.email
-  // console.log("hit howa")
   const otpuser = await otpModel.deleteMany({userId:email})
 
   const generatedOtp = crypto.randomInt(100000, 999999).toString();
-  console.log("chala")
   await otpModel.create({ otp: generatedOtp, userId:email });
 
   const transporter = nodemailer.createTransport({
@@ -65,7 +61,8 @@ export const otpProcessApi = async (req,res) => {
 
    transporter.sendMail({
     from: process.env.EMAIL,
-    to: "asghar778788@gmail.com",
+
+    to: email,
     subject: "Email Verification",
     html: EmailVerificationHtml(generatedOtp),
   });
@@ -74,13 +71,11 @@ export const otpProcessApi = async (req,res) => {
 };
 
 const signupController = async (req, res) => {
-  // console.log("Signup hit");
   try {
     const { name, email, password,cnic} = req.body;
 
     // console.log("hi",name, email, password,cnic)
     if (!name || !email || !password || !cnic) {
-      console.log(email, name, password);
       return res.status(400).json({
         data: null,
         status: false,
@@ -96,7 +91,6 @@ const signupController = async (req, res) => {
     });
 
     if (userExist) {
-      // console.log(userExist);
       return res.status(400).json({
         data: null,
         message: "Email already exists",
@@ -105,10 +99,8 @@ const signupController = async (req, res) => {
     }
 
     const userCreated = await userModel.create({ fullName:name, email, password,cnic });
-    // console.log(userCreated._id);
 
     
-    // await otpProcess(userCreated._id, email);
 
     res.json({
       data: null,
@@ -124,14 +116,12 @@ const signupController = async (req, res) => {
 
 const otpVerify = async (req, res) => {
   const { id, otp } = req.body;
-  console.log("hello",id,otp);
   if (!id || !otp) {
     return res.status(400).json("req fields are missing");
   }
 
   let getOtp = await otpModel.findOne({userId:id});
-  console.log(getOtp)
-  console.log("getOtp",getOtp)
+  
   if (!getOtp) {
     return res.status(400).json({
       data: null,
@@ -157,7 +147,6 @@ const otpVerify = async (req, res) => {
     status: true,
   });
 
-  // console.log(getOtp);
 };
 
 
