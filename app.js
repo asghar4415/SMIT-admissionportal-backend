@@ -17,7 +17,7 @@ const uri = "mongodb+srv://cadet1418:hHCb6mN8BWmoFqB8@smit-admissionportal.09yzg
 
 mongoose.connect(uri);
 mongoose.connection.on("connected",()=>console.log("mongoDb connected"));
-mongoose.connection.on("error",()=>console.log("error connecting to db", error));
+mongoose.connection.on("error",()=>console.log("error connecting to db"));
 app.use(router); 
 
 app.get("/", (req, res) => {
