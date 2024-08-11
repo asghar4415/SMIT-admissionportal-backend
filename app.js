@@ -16,7 +16,7 @@ const corsOptions = {
   optionsSuccessStatus: 204 // For legacy browsers
 };
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions)); // Apply CORS middleware
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -27,7 +27,8 @@ mongoose.connect(uri);
 mongoose.connection.on("connected", () => console.log("MongoDB connected"));
 mongoose.connection.on("error", (err) => console.log("Error connecting to DB:", err));
 
-app.options('*', cors(corsOptions));
+// Ensure OPTIONS requests are handled properly
+app.options('*', cors(corsOptions)); // Handles preflight requests
 
 app.use(router);
 
