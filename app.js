@@ -10,16 +10,18 @@ const PORT = process.env.PORT || 5000;
 
 // CORS Configuration
 const corsOptions = {
-  origin: "https://smit-admissionportal-student.vercel.app", // Replace with your frontend URL
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true, // Allow credentials if needed
-  optionsSuccessStatus: 204 // For legacy browsers
+  origin: [
+    'http://localhost:5173',
+    'https://smit-admissionportal-student.vercel.app'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
 };
 
-app.use(cors(corsOptions)); // Apply CORS middleware
-
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 
 const uri = "mongodb+srv://cadet1418:hHCb6mN8BWmoFqB8@smit-admissionportal.09yzg.mongodb.net/";
 
@@ -27,13 +29,17 @@ mongoose.connect(uri);
 mongoose.connection.on("connected", () => console.log("MongoDB connected"));
 mongoose.connection.on("error", (err) => console.log("Error connecting to DB:", err));
 
-// Ensure OPTIONS requests are handled properly
+
 app.options('*', cors(corsOptions)); // Handles preflight requests
 
 app.use(router);
 
 app.get("/", (req, res) => {
   res.json("Running");
+});
+
+app.get('/api/test', (req, res) => {
+  res.send('Test route is working');
 });
 
 app.post('/updateUserData', async (req, res) => {
