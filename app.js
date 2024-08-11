@@ -8,9 +8,15 @@ import userModel from "./models/userSchema.js";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// CORS Configuration
+const corsOptions = {
+  origin: "http://localhost:5173", // Replace with your frontend URL
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Allow credentials if needed
+  optionsSuccessStatus: 204 // For legacy browsers
+};
 
-
-
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,7 +27,8 @@ mongoose.connect(uri);
 mongoose.connection.on("connected", () => console.log("MongoDB connected"));
 mongoose.connection.on("error", (err) => console.log("Error connecting to DB:", err));
 
-app.use(cors());
+app.options('*', cors(corsOptions));
+
 app.use(router);
 
 app.get("/", (req, res) => {
