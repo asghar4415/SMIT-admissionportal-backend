@@ -13,8 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(cors());
-const uri = "mongodb://localhost:27017/smit";
-
+const uri = "mongodb+srv://cadet1418:hHCb6mN8BWmoFqB8@smit-admissionportal.09yzg.mongodb.net/?retryWrites=true&w=majority&appName=smit-admissionportal";
 
 mongoose.connect(uri);
 mongoose.connection.on("connected",()=>console.log("mongoDb connected"));
