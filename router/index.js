@@ -24,27 +24,27 @@ import {
 
 const router = express.Router();
 
-router.post("/api/auth/register", signupController);
-router.post("/api/auth/login", loginController);
-router.post("/api/verifyotp", otpVerify);
+router.post("/auth/register", signupController);
+router.post("/auth/login", loginController);
+router.post("/verifyotp", otpVerify);
 
 router.post("/update-student-details", verifyTokenMiddleware, studentDetails);
-router.post("/api/auth/resend-otp", otpProcessApi);
+router.post("/auth/resend-otp", otpProcessApi);
 router.post(
-  "/api/uploadimage",
+  "/uploadimage",
   upload.any("image"),
   UploadImage
 );
 
 router.get("/getUserData/:cnic", getStdDetails);
 router.get("/userOtpVerified/:email",userOtpVerified)
-router.post("/api/course/enroll", enrollIntoCourse);
+router.post("/course/enroll", enrollIntoCourse);
 
-router.get("/api/course/view", viewCourses);
-router.get("/api/auth/verify", verifyTokenMiddleware, verify);
+router.get("/course/view", viewCourses);
+router.get("/auth/verify", verifyTokenMiddleware, verify);
 
-router.get("/api/notification/:region", notificationHandler);
-router.get("/api/getnotification/:cnic", notificationHandler2);
+router.get("/notification/:region", notificationHandler);
+router.get("/getnotification/:cnic", notificationHandler2);
 
 
 
